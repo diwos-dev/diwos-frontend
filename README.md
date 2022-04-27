@@ -1,6 +1,7 @@
 
 ![](https://img.shields.io/badge/LICENSE-GNU%20AGPLv3-blue?style=flat-square)
 ![GitHub](https://img.shields.io/tokei/lines/github/diwos-dev/diwos-frontend?label=TOTAL%20LINES&style=flat-square)
+![GitHub](https://img.shields.io/github/workflow/status/diwos-dev/diwos-frontend/test%20action?label=BUILD&style=flat-square)
 
 <img align="right" src="https://sun9-88.userapi.com/s/v1/if2/70S2ojb2V8rExJVlBVTsH3veMB3Znka_oLacDSWlJaIaFm4XNj_f02q0UVZ34U1FKtBuCL3GWdx-Qi7J5U4_dNCB.jpg?size=2000x2000&quality=96&type=album" height="300" width="300">
 
