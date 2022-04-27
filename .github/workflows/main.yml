@@ -22,7 +22,7 @@ jobs:
           chmod 600 private_key
           
           ssh -o StrictHostKeyChecking=off -i private_key ${USER_NAME}@${HOSTNAME} '
-            cd /data/diwos-backend &&
+            cd /data/diwos-frontend &&
             sudo git checkout main &&
             sudo git fetch --all &&
             sudo git reset --hard origin/main &&
