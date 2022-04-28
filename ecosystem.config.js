@@ -5,7 +5,7 @@ module.exports = {
     name   : "diwos-frontend",
 	namespace : "diwos-frontend",
     script : "npm",
-	args : "serve",
+	args : "run serve",
 	autorestart : false,
     env_production: {
        NODE_ENV: "production"
