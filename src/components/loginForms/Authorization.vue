@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import '@/assets/css/LoginForm.scss'
 export default {
     name: 'LogForm',
@@ -34,15 +35,11 @@ export default {
     methods:{
         auth() {
             const requestOptions = {
-                method: "POST",
-                headers: { 
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    username : this.user_login,
-                    password : this.user_password
-                })
+                username : this.user_login,
+                password : this.user_password
             }
+
+            this.authorization(requestOptions)
             fetch("http://server.diwos.ru/login", requestOptions)
                 .then(response => response.json())
                 .then(result => {
@@ -60,8 +57,19 @@ export default {
                     localStorage.token = result.access_token
                     this.$router.push('game')
                 });
-        }
+        },
+
+        ...mapActions({
+            authorization: 'user/authorizationUser'
+        })
+    },//authorizationUser
+
+    computed:{
+        ...mapGetters({
+            
+        }),
     },
+    
     mounted() {
         if (localStorage.token) {
             this.$router.push('game')
