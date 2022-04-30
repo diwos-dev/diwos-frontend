@@ -62,7 +62,9 @@ class Graphics {
 
   }
 
-  graphishDrawInfoUpdate(obj) {
+  async graphishDrawInfoUpdate(obj) {
+
+    console.log('graphishDrawInfoUpdate ', obj)
 
     var drawInfoElement = this.drawInfos.find(function(element) {
       return element.id == obj.objId

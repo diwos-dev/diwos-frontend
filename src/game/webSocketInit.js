@@ -8,7 +8,7 @@ const ws = new WebSocket("ws://websocket.diwos.ru")
 ws.onmessage = function(event) {
 
     const wsResponse = JSON.parse(event.data);
-    console.log('WS onmessage', wsResponse);
+    console.log('WS onmessage', wsResponse.method, wsResponse);
 
     if (webSocketMethodsProcessing[wsResponse.method]) {
         webSocketMethodsProcessing[wsResponse.method](ws, wsResponse);
@@ -19,6 +19,7 @@ ws.onmessage = function(event) {
 ws.onopen = function(event) {
     console.log("WS connected ", event);
     webSocketMethods.ping(ws);
+    webSocketMethods.getWorld(ws);
 }
 
 export default ws;

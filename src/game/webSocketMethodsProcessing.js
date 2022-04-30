@@ -1,4 +1,5 @@
 
+import graphics from './graphics';
 
 function ping(ws, wsResponse) {
 
@@ -8,6 +9,17 @@ function ping(ws, wsResponse) {
 
 }
 
+function getWorld(ws, wsResponse) {
+
+    if (wsResponse.data) {
+        for (let obj in wsResponse.data) {
+            graphics.graphishDrawInfoUpdate(wsResponse.data[obj])
+        }
+    }
+
+}
+
 export default {
-    ping
+    ping,
+    getWorld
 }

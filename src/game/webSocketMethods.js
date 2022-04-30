@@ -17,7 +17,12 @@ function ping(ws, method = 'ping', message = {}) {
     sendMessage(ws, method, message);
 }
 
+function getWorld(ws, method = 'getWorld', message = {}) {
+    sendMessage(ws, method, message);
+}
+
 export default {
     sendMessage,
-    ping
+    ping,
+    getWorld
 }
