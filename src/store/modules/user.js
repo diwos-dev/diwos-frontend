@@ -3,8 +3,8 @@ import axios from "axios";
 export const namespaced = true;
  
 export const state = {
-    login: "",
-    userToken: "",
+    login: undefined,
+    userToken: undefined,
     userPing: 0,
     admin: false,
 }
@@ -18,6 +18,9 @@ export const getters = {
     },
     userLogin(state){
         return state.login 
+    },
+    userIsAdmin(state){
+        return state.admin 
     },
 }
  
@@ -39,7 +42,6 @@ export const mutations = {
 export const actions = {
 
     async registerUser({commit}, newUser){
-        console.log(newUser)
         await axios.post('http://server.diwos.ru/user/registration', newUser)
         .then(res => {
             commit('SET_USERTOKEN', res.data.token)
@@ -61,13 +63,12 @@ export const actions = {
             return err.response
         })
     },
-    isUserAdmin({commit}){
-        commit
-        return this.admin
+    async deleteToken({commit}){
+        await commit('SET_USERTOKEN', undefined)
     },
-    deleteToken({commit}){
-        commit('SET_USERTOKEN', "")
-    }
+    async deleteLogin({commit}){
+        await commit('SET_LOGIN', undefined)
+    },
 
 }
 

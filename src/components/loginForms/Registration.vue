@@ -43,11 +43,11 @@ export default {
                     password: this.user_password
                 }
             await this.register(requestOptions)
-            localStorage.login = this.userLogin;
+            localStorage.login = this.userLogin
             localStorage.token = this.userToken
-                if(localStorage.token) {
+                if(this.userToken && this.userLogin) {
                     this.$router.push('game')
-                }
+                }else {console.log("логин или токен не пришел")}
 
             } else {
                 const error = document.getElementById('error')
@@ -65,14 +65,9 @@ export default {
 
     computed:{
         ...mapGetters({
-            userToken: 'user/userToken'
+            userToken: 'user/userToken',
+            userLogin: 'user/userLogin',
         }),
     },
-
-    mounted() {
-        if (localStorage.token) {
-            this.$router.push('game')
-        }
-    }
 }
 </script>

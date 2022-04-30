@@ -26,31 +26,33 @@ import "@/assets/css/DevToolBar.scss"
 export default {
     name: 'Toolbar',
     methods: {
-        exit() {
-            console.log(this.deleteToken())
-            localStorage.login = this.userLogin;
-            localStorage.token = this.userToken
+        async exit() {
+            localStorage.login = undefined
+            localStorage.token = undefined
+            await this.deleteToken()
+            await this.deleteLogin()
             this.$router.push('login')
         },
         ...mapActions({
-            isUserAdmin: 'user/isUserAdmin',
-            deleteToken: 'user/deleteToken'
+            deleteToken: 'user/deleteToken',
+            deleteLogin: 'user/deleteLogin'
         }),
 
     },
 
     computed: {
         ...mapGetters({
-            isUserAdmid: 'user/isUserAdmin',
-            userToken: 'user/userToken'
+            userIsAdmin: 'user/userIsAdmin',
+            userToken: 'user/userToken',
+            userLogin: 'user/userLogin',
         }),
     },
 
     mounted() {
-        if (!localStorage.token) {
+        if (!localStorage.token || !localStorage.login) {
             this.$router.push('login')
         }
-        if(this.isUserAdmin){this.isDevMenuVisible = true}
+        if(this.userIsAdmin){this.isDevMenuVisible = true}
     },
 
     data() {

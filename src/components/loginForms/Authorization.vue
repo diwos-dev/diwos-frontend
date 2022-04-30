@@ -41,7 +41,7 @@ export default {
             await this.authorization(requestOptions)
             localStorage.login = this.userLogin;
             localStorage.token = this.userToken
-            if (!this.userToken) {
+            if (!this.userToken || !this.userLogin) {
                 const error = document.getElementById('error')
                 this.errorMessage = "Неверный логин или пароль"
                 error.style.display = "block";
@@ -63,11 +63,5 @@ export default {
             userLogin: 'user/userLogin',
         }),
     },
-    
-    mounted() {
-        if (localStorage.token) {
-            this.$router.push('game')
-        }
-    }
 }
 </script>
