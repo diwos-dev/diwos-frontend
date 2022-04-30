@@ -36,16 +36,18 @@ export default {
         }
     },
     methods:{
-        reg() {
+        async reg() {
             if (this.user_password == this.user_password2) {
-                // const requestOptions = {
-                //     login : this.user_login,
-                //     password : this.user_password
-                // }
-                this.register({
-                    login: this.user_login,
-                    password: this.user_password
-                })
+                const requestOptions = {
+                    username : this.user_login,
+                    password : this.user_password
+                }
+            await this.register(requestOptions)
+
+                if(this.userToken) {
+                    this.$router.push('game')
+                }
+
             } else {
                 const error = document.getElementById('error')
                 this.errorMessage = "Пароли не совпадают"
@@ -62,12 +64,12 @@ export default {
 
     computed:{
         ...mapGetters({
-            
+            userToken: 'user/userToken'
         }),
     },
 
     mounted() {
-        if (localStorage.token) {
+        if (this.userToken) {
             this.$router.push('game')
         }
     }

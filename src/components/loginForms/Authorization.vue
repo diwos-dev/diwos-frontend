@@ -33,11 +33,12 @@ export default {
         }
     },
     methods:{
-        auth() {
+        async auth() {
             const requestOptions = {
-                username : this.user_login,
+                login : this.user_login,
                 password : this.user_password
             }
+<<<<<<< Updated upstream
 
             localStorage.login = this.user_login;
 
@@ -59,21 +60,33 @@ export default {
                     localStorage.token = result.access_token
                     this.$router.push('game')
                 });
+=======
+            await this.authorization(requestOptions)
+            if (!this.userToken) {
+                const error = document.getElementById('error')
+                this.errorMessage = "Неверный логин или пароль"
+                error.style.display = "block";
+                setTimeout(()=>{
+                    error.style.opacity = 1;
+                },5)
+                return 
+            }
+            this.$router.push('game')
+>>>>>>> Stashed changes
         },
-
         ...mapActions({
-            authorization: 'user/authorizationUser'
+            authorization: 'user/authorizationUser',
         })
-    },//authorizationUser
+    },
 
     computed:{
         ...mapGetters({
-            
+            userToken: 'user/userToken'
         }),
     },
     
     mounted() {
-        if (localStorage.token) {
+        if (this.userToken) {
             this.$router.push('game')
         }
     }

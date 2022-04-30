@@ -20,37 +20,41 @@
 
 
 <script>
+import { mapActions, mapGetters} from 'vuex'
 import "@/assets/css/DevToolBar.scss"
 
 export default {
     name: 'Toolbar',
-    methods:{
+    methods: {
         exit() {
-            localStorage.removeItem("token");
-            this.$router.push('login');
-        }
+            console.log(this.deleteToken())
+            this.$router.push('login')
+        },
+        ...mapActions({
+            isUserAdmin: 'user/isUserAdmin',
+            deleteToken: 'user/deleteToken'
+        }),
+
     },
 
-    data(){
+    computed: {
+        ...mapGetters({
+            isUserAdmid: 'user/isUserAdmin',
+            userToken: 'user/userToken'
+        }),
+    },
+
+    mounted() {
+        if (!this.userToken) {
+            this.$router.push('login')
+        }
+        if(this.isUserAdmin){this.isDevMenuVisible = true}
+    },
+
+    data() {
         return{
             isDevMenuVisible: false,
         }
-    },
-    mounted() {
-        if (!localStorage.token) {
-            this.$router.push('login')
-        }
-        fetch("http://server.diwos.ru/user/?login=test")
-        .then(response => response.json())
-        .then(result =>{   
-            if (result.statusCode){
-                if (result.statusCode == 401){
-                    alert("Ошибка")
-                    return
-                }
-            }
-            if(result._id == "61da0175179532fd384049da"){this.isDevMenuVisible = false}
-        });
     },
 }
 </script>
