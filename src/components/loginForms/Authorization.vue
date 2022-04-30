@@ -39,8 +39,10 @@ export default {
                 password : this.user_password
             }
 
+            localStorage.login = this.user_login;
+
             this.authorization(requestOptions)
-            fetch("http://server.diwos.ru/login", requestOptions)
+            fetch("http://server.diwos.ru/auth", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.statusCode) {

@@ -6,7 +6,8 @@ function sendMessage(ws, method, message ) {
         method,
         message,
         date: new Date(),
-        token: localStorage.getItem('token')
+        token: localStorage.getItem('token'),
+        login: localStorage.getItem('login'),
     }
 
     console.log('WS sendMessage', method, wsPayload, JSON.stringify(wsPayload));
