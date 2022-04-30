@@ -22,7 +22,9 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import '@/assets/css/LoginForm.scss'
+
 export default {
     name: 'RegForm',
     data() {
@@ -36,25 +38,14 @@ export default {
     methods:{
         reg() {
             if (this.user_password == this.user_password2) {
-                const requestOptions = {
-                    method: "POST",
-                    headers: { 
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        login : this.user_login,
-                        password : this.user_password
-                    })
-                }
-                console.log(requestOptions)
-                fetch("http://server.diwos.ru/user", requestOptions)
-                    .then(response => {
-                        console.log(response)
-                        if (response.status != 201) {
-                            alert("Ошибка")
-                        }
-                        this.$router.push('game')
-                    });
+                // const requestOptions = {
+                //     login : this.user_login,
+                //     password : this.user_password
+                // }
+                this.register({
+                    login: this.user_login,
+                    password: this.user_password
+                })
             } else {
                 const error = document.getElementById('error')
                 this.errorMessage = "Пароли не совпадают"
@@ -63,8 +54,18 @@ export default {
                     error.style.opacity = 1;
                 },5)
             }
-        }
+        },
+        ...mapActions({
+            register: 'user/registerUser'
+        }),
     },
+
+    computed:{
+        ...mapGetters({
+            
+        }),
+    },
+
     mounted() {
         if (localStorage.token) {
             this.$router.push('game')
