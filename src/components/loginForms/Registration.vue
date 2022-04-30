@@ -39,8 +39,8 @@ export default {
         async reg() {
             if (this.user_password == this.user_password2) {
                 const requestOptions = {
-                    username : this.user_login,
-                    password : this.user_password
+                    login: this.user_login,
+                    password: this.user_password
                 }
             await this.register(requestOptions)
             localStorage.login = this.userLogin;
