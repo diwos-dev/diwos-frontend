@@ -43,8 +43,9 @@ export default {
                     password : this.user_password
                 }
             await this.register(requestOptions)
-
-                if(this.userToken) {
+            localStorage.login = this.userLogin;
+            localStorage.token = this.userToken
+                if(localStorage.token) {
                     this.$router.push('game')
                 }
 
@@ -69,7 +70,7 @@ export default {
     },
 
     mounted() {
-        if (this.userToken) {
+        if (localStorage.token) {
             this.$router.push('game')
         }
     }

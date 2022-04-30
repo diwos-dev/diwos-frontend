@@ -3,7 +3,7 @@ import axios from "axios";
 export const namespaced = true;
  
 export const state = {
-    currentUser: {},
+    login: "",
     userToken: "",
     userPing: 0,
     admin: false,
@@ -16,11 +16,14 @@ export const getters = {
     userPing(state) {
         return state.userPing
     },
+    userLogin(state){
+        return state.login 
+    },
 }
  
 export const mutations = {
-    SET_USER(state, item){
-        state.currentUser = item
+    SET_LOGIN(state, item){
+        state.login = item
     },
     SET_ADMIN(state, item){
         state.admin = item
@@ -41,7 +44,7 @@ export const actions = {
         .then(res => {
             commit('SET_USERTOKEN', res.data.token)
             commit('SET_ADMIN', res.data.isAdmin)
-            return true
+            commit('SET_LOGIN', res.data.login)
         })
         .catch(err => {
             return err.response
@@ -49,9 +52,10 @@ export const actions = {
     },
     async authorizationUser({commit}, registeringUser){
         await axios.post('http://server.diwos.ru/user/auth', registeringUser)
-        .then(response => {
-            commit('SET_USERTOKEN', response.data.token)
-            commit('SET_ADMIN', response.data.isAdmin)
+        .then(res => {
+            commit('SET_USERTOKEN', res.data.token)
+            commit('SET_ADMIN', res.data.isAdmin)
+            commit('SET_LOGIN', res.data.login)
         })
         .catch(err => {
             return err.response

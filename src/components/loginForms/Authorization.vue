@@ -38,30 +38,9 @@ export default {
                 login : this.user_login,
                 password : this.user_password
             }
-<<<<<<< Updated upstream
-
-            localStorage.login = this.user_login;
-
-            this.authorization(requestOptions)
-            fetch("http://server.diwos.ru/auth", requestOptions)
-                .then(response => response.json())
-                .then(result => {
-                    if (result.statusCode) {
-                        if (result.statusCode == 401) {
-                            const error = document.getElementById('error')
-                            this.errorMessage = "Неверный логин или пароль"
-                            error.style.display = "block";
-                            setTimeout(()=>{
-                                error.style.opacity = 1;
-                            },5)
-                            return 
-                        }
-                    }
-                    localStorage.token = result.access_token
-                    this.$router.push('game')
-                });
-=======
             await this.authorization(requestOptions)
+            localStorage.login = this.userLogin;
+            localStorage.token = this.userToken
             if (!this.userToken) {
                 const error = document.getElementById('error')
                 this.errorMessage = "Неверный логин или пароль"
@@ -72,7 +51,6 @@ export default {
                 return 
             }
             this.$router.push('game')
->>>>>>> Stashed changes
         },
         ...mapActions({
             authorization: 'user/authorizationUser',
@@ -81,12 +59,13 @@ export default {
 
     computed:{
         ...mapGetters({
-            userToken: 'user/userToken'
+            userToken: 'user/userToken',
+            userLogin: 'user/userLogin',
         }),
     },
     
     mounted() {
-        if (this.userToken) {
+        if (localStorage.token) {
             this.$router.push('game')
         }
     }

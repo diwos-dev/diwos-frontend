@@ -28,6 +28,8 @@ export default {
     methods: {
         exit() {
             console.log(this.deleteToken())
+            localStorage.login = this.userLogin;
+            localStorage.token = this.userToken
             this.$router.push('login')
         },
         ...mapActions({
@@ -45,7 +47,7 @@ export default {
     },
 
     mounted() {
-        if (!this.userToken) {
+        if (!localStorage.token) {
             this.$router.push('login')
         }
         if(this.isUserAdmin){this.isDevMenuVisible = true}
