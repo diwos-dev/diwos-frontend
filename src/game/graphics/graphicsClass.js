@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 import * as PIXI from 'pixi.js';
 
 class Graphics {
@@ -15,17 +16,17 @@ class Graphics {
     this.x = 0
     this.y = 0
 
-    // var documentMouseX = 0
-    // var documentMouseY = 0
-    // var mouseX = 0
-    // var mouseY = 0
-    // var canvasMouseMoving = false
+    this.documentMouseX = 0
+    this.documentMouseY = 0
+    this.mouseX = 0
+    this.mouseY = 0
+    this.canvasMouseMoving = false
     this.SCALE = 20
-    // var SIZEx = window.innerWidth
-    // var SIZEy = window.innerHeight
-    this.SIZE = 600 //(SIZEx + SIZEy)/2
+    this.SIZEx = window.innerWidth
+    this.SIZEy = window.innerHeight
+    this.SIZE = (this.SIZEx + this.SIZEy)/2
     this.relativeSCALE = this.SIZE / this.SCALE
-    // var SCALEChange = 1.2
+    this.SCALEChange = 1.1
 
     this.timeNow = (new Date()).getTime()
     this.timePast = this.timeNow
@@ -190,7 +191,7 @@ class Graphics {
       var yScale = 1 / (drawInfo.texture.height / this.pixTexturesCompression) / (this.SCALE / this.pixTexturesCompression) * drawInfo.size
       drawInfo.scale.set(xScale , yScale )
 
-      //console.log(drawInfo.xDestinationFrom)
+      console.log(this.SCALE)
 
     }, this);
   }
