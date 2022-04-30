@@ -1,16 +1,18 @@
 
 import { Graphics } from './graphics.js'
-import { socket } from './socketio.js';
+import ws from './webSocketInit.js';
 
-const graphics = new  Graphics();
+const graphics = new Graphics();
 
-socket.on('world', (world) => {
-    console.log('in', world);
-    localStorage.setItem('mainObjects', JSON.stringify(world))
+console.log('Game services started', ws, graphics);
 
-    if (world) {
-        world.data.forEach(obj => {
-            graphics.graphishDrawInfoUpdate(obj)
-        });
-    }
-})
+// socket.on('world', (world) => {
+//     console.log('in', world);
+//     localStorage.setItem('mainObjects', JSON.stringify(world))
+
+//     if (world) {
+//         world.data.forEach(obj => {
+//             graphics.graphishDrawInfoUpdate(obj)
+//         });
+//     }
+// })

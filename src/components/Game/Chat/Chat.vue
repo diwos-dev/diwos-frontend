@@ -9,7 +9,8 @@
 
 import MessageList from "./MessageList.vue"
 import MessageForm from "./MessageForm.vue"
-import { sendSocketMessage, socket } from "@/game/socketio"
+// import ws from '@/game/webSocketInit';
+// import { sendMessage } from "@/game/webSocketMethods"
 
 export default {
     name: 'Chat',
@@ -26,15 +27,16 @@ export default {
     },
     methods:{
        sendMessage(message) {
+           console.log(message);
             // this.messages.push(message);
             // message.token = 
-            sendSocketMessage(socket, 'chatMessage', message)
+            // sendMessage(ws, 'chatMessage', message)
        }
     },
     created() {
-        socket.on('chatMessage', (message) => {
-            this.messages.push(message);
-        })
+        // socket.on('chatMessage', (message) => {
+        //     this.messages.push(message);
+        // })
     }
 }
 </script>
