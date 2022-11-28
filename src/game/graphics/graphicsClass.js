@@ -191,8 +191,6 @@ class Graphics {
       var yScale = 1 / (drawInfo.texture.height / this.pixTexturesCompression) / (this.SCALE / this.pixTexturesCompression) * drawInfo.size
       drawInfo.scale.set(xScale , yScale )
 
-      console.log(this.SCALE)
-
     }, this);
   }
 }

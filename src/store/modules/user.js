@@ -1,4 +1,5 @@
 import axios from "axios";
+import {URL_BE} from "@/config.js"; 
  
 export const namespaced = true;
  
@@ -42,7 +43,7 @@ export const mutations = {
 export const actions = {
 
     async registerUser({commit}, newUser){
-        await axios.post('http://server.diwos.ru/user/registration', newUser)
+        await axios.post(URL_BE +'user/registration', newUser)
         .then(res => {
             commit('SET_USERTOKEN', res.data.token)
             commit('SET_ADMIN', res.data.isAdmin)
@@ -53,7 +54,7 @@ export const actions = {
         })
     },
     async authorizationUser({commit}, registeringUser){
-        await axios.post('http://server.diwos.ru/user/auth', registeringUser)
+        await axios.post(URL_BE + 'user/auth', registeringUser)
         .then(res => {
             commit('SET_USERTOKEN', res.data.token)
             commit('SET_ADMIN', res.data.isAdmin)

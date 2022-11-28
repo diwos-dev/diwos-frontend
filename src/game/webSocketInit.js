@@ -3,7 +3,7 @@ import webSocketMethods from './webSocketMethods.js';
 import webSocketMethodsProcessing from './webSocketMethodsProcessing.js';
 
 console.log("Starting connection to WebSocket Server")
-const ws = new WebSocket("ws://websocket.diwos.ru")
+const ws = new WebSocket("ws://localhost:13372")
 
 ws.onmessage = function(event) {
 
